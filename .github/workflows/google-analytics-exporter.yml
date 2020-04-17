@@ -7,6 +7,7 @@ on:
       - master
     paths:
       - '*'
+      - '.github/workflows/google-analytics-exporter.yml'
     # Publish `v1.2.3` tags as releases.
     tags:
       - v*
@@ -15,6 +16,7 @@ env:
   IMAGE_NAME: google-analytics-exporter
   IMAGE_VERSION: 0.0.1-r${{github.run_number}}
   IMAGE_REGISTRY: docker.pkg.github.com/techniumlabs
+  BASE_IMAGE_REPOSITORY: containers
   IMAGE_REPOSITORY: google-analytics-exporter
 
 jobs:
@@ -37,7 +39,7 @@ jobs:
             --label "org.opencontainers.image.revision=${{github.sha}}"
             --label "org.opencontainers.image.vendor=techniumlabs"
             --build-arg IMAGE_REGISTRY=${IMAGE_REGISTRY}
-            --build-arg IMAGE_REPOSITORY=${IMAGE_REPOSITORY}
+            --build-arg IMAGE_REPOSITORY=${BASE_IMAGE_REPOSITORY}
             --build-arg MAINTAINER=${MAINTAINER} --build-arg TIMEZONE=${TIMEZONE} --tag image .
 
         env:
