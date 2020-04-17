@@ -32,7 +32,7 @@ jobs:
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
       - name: Build image
-        run: docker build --file traefik/2.2/Dockerfile
+        run: docker build --file Dockerfile
             --label "org.opencontainers.image.source=https://github.com/techniumlabs/google-analytics-exporter"
             --label "org.opencontainers.image.revision=${{github.sha}}"
             --label "org.opencontainers.image.vendor=techniumlabs"
