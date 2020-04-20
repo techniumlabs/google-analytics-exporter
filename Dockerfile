@@ -2,15 +2,22 @@ ARG  IMAGE_REGISTRY
 ARG  IMAGE_REPOSITORY
 FROM ${IMAGE_REGISTRY}/${IMAGE_REPOSITORY}/base:3.10-alpine-r11
 
+RUN addgroup -g 1000 appuser && \
+  adduser -S -G appuser -u 1000 appuser
+
 WORKDIR /app
-COPY requirements.txt /app
+COPY --chown=appuser requirements.txt /app
 
 RUN apk add --no-cache \
   python3=3.7.5-r1 \
   && pip3 install -r requirements.txt
 
-COPY analytics.py /app/analytics.py
+COPY --chown=appuser analytics.py /app/analytics.py
 
-EXPOSE 8080
+USER appuser
 
-ENTRYPOINT ["cinit", "--", "python3", "analytics.py"]
+EXPOSE 8000
+
+ENTRYPOINT ["cinit", "--"]
+
+CMD ["python3", "analytics.py"]
