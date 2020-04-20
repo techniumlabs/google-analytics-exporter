@@ -1,14 +1,14 @@
 default:
-  scopes:
-    - https://www.googleapis.com/auth/analytics.readonly
 
   sites:
-    - name: <any name>
-      viewid: <put_your_viewid_here>
-      credsfile: <location of creds file>
+    - viewname: <viewname>
+      viewid: <viewid>
+      credsfile: <path_to_credsfile>
+      scopes:
+        - https://www.googleapis.com/auth/analytics.readonly
 
   query:
-    - name: users
+    - name: ga_users
       date:
         - start: today
           end: today
@@ -20,7 +20,7 @@ default:
         - ga:country
         - ga:userType
 
-    - name: sessions
+    - name: ga_sessions
       date:
         - start: today
           end: today
@@ -33,7 +33,7 @@ default:
       dimensions:
         - ga:sessionDurationBucket
 
-    - name: pageviews
+    - name: ga_pageviews
       date:
         - start: today
           end: today
@@ -43,7 +43,7 @@ default:
         - ga:pageviews
         - ga:pageviewsPerSession
 
-    - name: speed
+    - name: ga_speed
       date:
         - start: today
           end: today
