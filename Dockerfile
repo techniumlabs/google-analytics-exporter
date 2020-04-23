@@ -1,6 +1,6 @@
 ARG  IMAGE_REGISTRY
 ARG  IMAGE_REPOSITORY
-FROM ${IMAGE_REGISTRY}/${IMAGE_REPOSITORY}/base:3.10-alpine-r11
+FROM ${IMAGE_REGISTRY}/${IMAGE_REPOSITORY}/base:3.10-alpine-r12
 
 RUN addgroup -g 1000 appuser && \
   adduser -S -G appuser -u 1000 appuser
